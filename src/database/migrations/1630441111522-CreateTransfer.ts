@@ -24,7 +24,7 @@ export default class CreateTransfer1630441111522 implements MigrationInterface {
           },
           {
             name: 'transfer_date',
-            type: 'datetime',
+            type: 'date',
             isNullable: false,
           },
           {

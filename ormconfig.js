@@ -4,7 +4,7 @@ module.exports = {
   "port": 5432,
   "username": "postgres",
   "password": "docker",
-  "database": "tccdatabase",
+  "database": "apaed",
   "entities": [
     "./src/models/*.ts"
   ],

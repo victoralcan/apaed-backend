@@ -17,7 +17,7 @@ class Transfer {
   @Column()
   description: string;
 
-  @Column('datetime')
+  @Column('date')
   transfer_date: Date;
 
   @Column()

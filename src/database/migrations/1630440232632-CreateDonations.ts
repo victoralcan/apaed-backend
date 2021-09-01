@@ -26,7 +26,7 @@ export default class CreateDonations1630440232632
           },
           {
             name: 'donation_date',
-            type: 'datetime',
+            type: 'date',
             isNullable: false,
           },
           {

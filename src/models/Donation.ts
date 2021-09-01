@@ -21,7 +21,7 @@ class Donation {
   @Column()
   type: string;
 
-  @Column('datetime')
+  @Column('date')
   donation_date: Date;
 
   @Column()
