@@ -37,6 +37,7 @@ export default class CreateDonors1630440117676 implements MigrationInterface {
           {
             name: 'active',
             type: 'boolean',
+            default: true,
           },
           {
             name: 'created_at',

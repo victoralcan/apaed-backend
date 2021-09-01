@@ -37,6 +37,7 @@ export default class CreateProduct1630440831756 implements MigrationInterface {
             name: 'active',
             type: 'boolean',
             isNullable: false,
+            default: true,
           },
           {
             name: 'created_at',

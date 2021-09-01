@@ -53,6 +53,7 @@ export default class CreateContacts1630439544110 implements MigrationInterface {
           {
             name: 'active',
             type: 'boolean',
+            default: true,
           },
           {
             name: 'created_at',

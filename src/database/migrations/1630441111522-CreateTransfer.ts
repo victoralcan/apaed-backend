@@ -46,6 +46,7 @@ export default class CreateTransfer1630441111522 implements MigrationInterface {
             name: 'active',
             type: 'boolean',
             isNullable: false,
+            default: true,
           },
           {
             name: 'created_at',

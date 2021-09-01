@@ -33,6 +33,7 @@ export default class CreateLocals1630439736655 implements MigrationInterface {
           {
             name: 'active',
             type: 'boolean',
+            default: true,
           },
           {
             name: 'created_at',
@@ -51,7 +52,7 @@ export default class CreateLocals1630439736655 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'locals',
       new TableForeignKey({
-        name: 'ContactLocal',
+        name: 'LocalContact',
         columnNames: ['contact_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'contacts',

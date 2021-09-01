@@ -22,6 +22,7 @@ export default class CreateTypes1630440568370 implements MigrationInterface {
             name: 'active',
             type: 'boolean',
             isNullable: false,
+            default: true,
           },
           {
             name: 'created_at',

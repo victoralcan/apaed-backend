@@ -52,6 +52,7 @@ export default class CreateNcm1630440634444 implements MigrationInterface {
             name: 'active',
             type: 'boolean',
             isNullable: false,
+            default: true,
           },
           {
             name: 'created_at',

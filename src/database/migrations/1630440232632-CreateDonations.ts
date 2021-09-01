@@ -28,6 +28,7 @@ export default class CreateDonations1630440232632
             name: 'donation_date',
             type: 'date',
             isNullable: false,
+            default: 'now()',
           },
           {
             name: 'donor_id',
@@ -38,6 +39,7 @@ export default class CreateDonations1630440232632
             name: 'active',
             type: 'boolean',
             isNullable: false,
+            default: true,
           },
           {
             name: 'created_at',

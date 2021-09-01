@@ -42,6 +42,7 @@ export default class CreateProductLocalDonation1630440914508
             name: 'active',
             type: 'boolean',
             isNullable: false,
+            default: true,
           },
           {
             name: 'created_at',

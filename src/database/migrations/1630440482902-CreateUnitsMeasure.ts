@@ -23,6 +23,7 @@ export default class CreateUnitsMeasure1630440482902
             name: 'active',
             type: 'boolean',
             isNullable: false,
+            default: true,
           },
           {
             name: 'created_at',
