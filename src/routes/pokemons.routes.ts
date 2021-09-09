@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 
-import PokemonsRepository from '../repositories/PokemonsRepository';
+import RolesRepository from '../repositories/RolesRepository';
 
 import CreatePokemonService from '../services/CreatePokemonService';
 
@@ -9,7 +9,7 @@ const pokemonsRouter = Router();
 
 pokemonsRouter.get('/:name', async (request, response) => {
   const { name } = request.params;
-  const pokemonsRepository = getCustomRepository(PokemonsRepository);
+  const pokemonsRepository = getCustomRepository(RolesRepository);
   const pokemonOnCache = await pokemonsRepository.findOne({
     where: { name },
   });
