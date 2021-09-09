@@ -10,6 +10,7 @@ import createUnitsMeasure from './UnitsMeasure';
 import createTypes from './Types';
 import createNcm from './Ncm';
 import createProducts from './Product';
+import createProductLocalDonation from './ProductLocalDonation';
 
 const adminRoleId = uuidV4();
 const userRoleId = uuidV4();
@@ -52,6 +53,13 @@ const product3Id = uuidV4();
 const product4Id = uuidV4();
 const product5Id = uuidV4();
 const product6Id = uuidV4();
+
+const productLocalDonation1Id = uuidV4();
+const productLocalDonation2Id = uuidV4();
+const productLocalDonation3Id = uuidV4();
+const productLocalDonation4Id = uuidV4();
+const productLocalDonation5Id = uuidV4();
+const productLocalDonation6Id = uuidV4();
 
 async function execute() {
   try {
@@ -113,6 +121,32 @@ async function execute() {
       ncm5Id,
       ncm4Id,
       ncm1Id,
+    );
+    await createProductLocalDonation(
+      productLocalDonation1Id,
+      productLocalDonation2Id,
+      productLocalDonation3Id,
+      productLocalDonation4Id,
+      productLocalDonation5Id,
+      productLocalDonation6Id,
+      donation1Id,
+      donation1Id,
+      donation1Id,
+      donation2Id,
+      donation2Id,
+      donation2Id,
+      local1Id,
+      local1Id,
+      local1Id,
+      local1Id,
+      local1Id,
+      local1Id,
+      product1Id,
+      product2Id,
+      product2Id,
+      product3Id,
+      product1Id,
+      product4Id,
     );
   } catch (e) {
     console.log(e);

@@ -22,6 +22,7 @@ export default class CreateProductLocalDonation1630440914508
           {
             name: 'expiration_date',
             type: 'date',
+            isNullable: true,
           },
           {
             name: 'donation_id',
