@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { validate } from 'uuid';
-import { cadastroSchema } from '../schemas/contactSchema';
+import { cadastroSchema, updateSchema } from '../schemas/contactSchema';
 
 import ContactsRepository from '../repositories/ContactsRepository';
-import CreateContactService from '../services/CreateContactService';
+import CreateContactService from '../services/Contact/CreateContactService';
+import DeleteContactService from '../services/Contact/DeleteContactService';
+import UpdateContactService from '../services/Contact/UpdateContactService';
 
 const contactsRouter = Router();
 
@@ -76,6 +78,64 @@ contactsRouter.post('/', async (request, response) => {
       .json({ error: 'An error ocurred. Please try again!' });
   }
   return response.json(newContact);
+});
+
+contactsRouter.put('/', async (request, response) => {
+  if (!(await updateSchema.isValid(request.body))) {
+    return response.status(400).json({ error: 'Validation fails' });
+  }
+
+  const {
+    id,
+    public_place,
+    complement,
+    number,
+    district,
+    city,
+    state,
+    country,
+    zip_code,
+    phone,
+  } = request.body;
+
+  const contactToUpdate = {
+    id,
+    public_place,
+    complement,
+    number,
+    district,
+    city,
+    state,
+    country,
+    zip_code,
+    phone,
+  };
+
+  if (!validate(id)) {
+    return response.status(400).json({ error: 'Invalid Id' });
+  }
+
+  const updateContact = new UpdateContactService();
+  const updatedContact = await updateContact.execute(contactToUpdate);
+
+  if (!updatedContact) {
+    return response
+      .status(500)
+      .json({ error: 'Something went wrong. Please try again' });
+  }
+
+  return response.json(updatedContact);
+});
+
+contactsRouter.delete('/:id', async (request, response) => {
+  const { id } = request.params;
+  if (!validate(id)) {
+    return response.status(400).json({ error: 'Invalid Id' });
+  }
+  const deleteContact = new DeleteContactService();
+  await deleteContact.execute({ id });
+
+  return response.status(204).send();
 });
 
 export default contactsRouter;
