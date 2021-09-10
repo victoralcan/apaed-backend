@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import pokemonsRouter from './pokemons.routes';
+import contactsRouter from './contacts.routes';
 
 const routes = Router();
 
-routes.use('/pokemons', pokemonsRouter);
+routes.use('/contacts', contactsRouter);
 
 export default routes;
