@@ -29,7 +29,6 @@ class UpdateContactService {
     );
 
     if (updateResult.affected) {
-      // eslint-disable-next-line no-return-await
       return await contactsRepository.findOne({
         where: { id: toUpdateContact.id },
       });
