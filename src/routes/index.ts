@@ -2,6 +2,7 @@ import { Router } from 'express';
 import authMiddleware from '../middlewares/auth';
 import contactsRouter from './contacts.routes';
 import localsRouter from './locals.routes';
+import usersRouter from './users.routes';
 import { GetSession, CreateSession } from '../services/Session/SessionService';
 
 const routes = Router();
@@ -15,5 +16,7 @@ routes.get('/session', GetSession);
 routes.use('/contacts', contactsRouter);
 
 routes.use('/locals', localsRouter);
+
+routes.use('/users', usersRouter);
 
 export default routes;
