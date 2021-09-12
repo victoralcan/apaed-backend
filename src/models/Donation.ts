@@ -16,9 +16,6 @@ class Donation {
   id: string;
 
   @Column()
-  name: string;
-
-  @Column()
   type: string;
 
   @Column('date')
@@ -35,6 +32,9 @@ class Donation {
     productLocalDonation => productLocalDonation.donation,
   )
   productLocalDonation: ProductLocalDonation[];
+
+  @Column('boolean')
+  active: boolean;
 
   @CreateDateColumn()
   created_at: Date;

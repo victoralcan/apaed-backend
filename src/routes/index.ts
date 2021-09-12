@@ -4,6 +4,7 @@ import contactsRouter from './contacts.routes';
 import localsRouter from './locals.routes';
 import usersRouter from './users.routes';
 import donorsRouter from './donors.routes';
+import donationsRouter from './donations.routes';
 import { GetSession, CreateSession } from '../services/Session/SessionService';
 
 const routes = Router();
@@ -21,5 +22,7 @@ routes.use('/locals', localsRouter);
 routes.use('/users', usersRouter);
 
 routes.use('/donors', donorsRouter);
+
+routes.use('/donations', donationsRouter);
 
 export default routes;
