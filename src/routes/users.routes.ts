@@ -6,7 +6,6 @@ import { cadastroSchema, updateSchema } from '../schemas/userSchema';
 import UsersRepository from '../repositories/UsersRepository';
 import CreateUserService from '../services/User/CreateUserService';
 import DeleteUserService from '../services/User/DeleteUserService';
-// @ts-ignore
 import UpdateUserService from '../services/User/UpdateUserService';
 
 const usersRouter = Router();

@@ -8,6 +8,7 @@ import donationsRouter from './donations.routes';
 import unitsMeasureRouter from './unitsMeasure.routes';
 import typesRouter from './types.routes';
 import ncmRouter from './ncm.routes';
+import productsRouter from './products.routes';
 import { GetSession, CreateSession } from '../services/Session/SessionService';
 
 const routes = Router();
@@ -33,5 +34,7 @@ routes.use('/units_measure', unitsMeasureRouter);
 routes.use('/types', typesRouter);
 
 routes.use('/ncm', ncmRouter);
+
+routes.use('/products', productsRouter);
 
 export default routes;
