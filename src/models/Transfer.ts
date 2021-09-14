@@ -35,6 +35,9 @@ class Transfer {
   @Column()
   product_local_donation_id: string;
 
+  @Column('boolean')
+  active: boolean;
+
   @ManyToOne(() => ProductLocalDonation, { eager: true })
   productLocalDonation: ProductLocalDonation;
 
