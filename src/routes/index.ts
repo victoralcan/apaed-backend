@@ -5,6 +5,8 @@ import localsRouter from './locals.routes';
 import usersRouter from './users.routes';
 import donorsRouter from './donors.routes';
 import donationsRouter from './donations.routes';
+import unitsMeasureRouter from './unitsMeasure.routes';
+import typesRouter from './types.routes';
 import { GetSession, CreateSession } from '../services/Session/SessionService';
 
 const routes = Router();
@@ -24,5 +26,9 @@ routes.use('/users', usersRouter);
 routes.use('/donors', donorsRouter);
 
 routes.use('/donations', donationsRouter);
+
+routes.use('/units_measure', unitsMeasureRouter);
+
+routes.use('/types', typesRouter);
 
 export default routes;
