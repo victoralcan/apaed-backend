@@ -15,9 +15,6 @@ class ProductLocalDonation {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  name: string;
-
   @Column('date')
   expiration_date: Date;
 

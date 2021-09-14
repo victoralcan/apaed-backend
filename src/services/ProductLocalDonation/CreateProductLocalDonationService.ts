@@ -1,0 +1,33 @@
+import { getCustomRepository } from 'typeorm';
+import ProductLocalDonation from '../../models/ProductLocalDonation';
+import ProductLocalDonationRepository from '../../repositories/ProductLocalDonationRepository';
+
+interface IRequestDTO {
+  product_id: string;
+  expiration_date: string;
+  donation_id: string;
+  local_id: string;
+  active: boolean;
+}
+
+class CreateProductLocalDonationService {
+  public async execute(
+    ProductLocalDonationToCreate: IRequestDTO,
+  ): Promise<ProductLocalDonation | undefined> {
+    const productLocalDonationRepository = getCustomRepository(
+      ProductLocalDonationRepository,
+    );
+
+    try {
+      const newProductLocalDonation = productLocalDonationRepository.create(
+        ProductLocalDonationToCreate,
+      );
+      await productLocalDonationRepository.save(newProductLocalDonation);
+      return newProductLocalDonation;
+    } catch (e) {
+      return undefined;
+    }
+  }
+}
+
+export default CreateProductLocalDonationService;

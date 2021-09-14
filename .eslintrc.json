@@ -47,7 +47,8 @@
       }
     ],
     "@typescript-eslint/ban-ts-comment": "off",
-    "no-return-await": "off"
+    "no-return-await": "off",
+    "no-plusplus": "off"
   },
   "settings": {
     "import/resolver": {
