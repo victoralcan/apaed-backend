@@ -52,20 +52,19 @@ transferRouter.post('/', async (request, response) => {
   const createTransfer = new CreateTransferService();
 
   try {
-    for (let i = 0; i < amount; i++) {
-      const newTransfer = await createTransfer.execute({
-        origin_id: localId,
-        destiny_id,
-        product_id,
-        description,
-        active,
-        expiration_date,
-      });
-      if (!newTransfer)
-        return response
-          .status(500)
-          .json({ error: 'An error ocurred. Please try again!' });
-    }
+    const transfers = await createTransfer.execute({
+      origin_id: localId,
+      destiny_id,
+      product_id,
+      description,
+      active,
+      expiration_date,
+      amount,
+    });
+    if (!transfers || transfers.length === 0)
+      return response
+        .status(500)
+        .json({ error: 'An error ocurred. Please try again!' });
   } catch (e) {
     console.log(e);
     throw new Error();

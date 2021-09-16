@@ -10,6 +10,7 @@ interface IRequestDTO {
   description: string;
   expiration_date: string;
   active: boolean;
+  amount: number;
 }
 
 class CreateTransferService {
@@ -20,6 +21,7 @@ class CreateTransferService {
     product_id,
     active,
     expiration_date,
+    amount,
   }: IRequestDTO): Promise<Transfer[] | undefined> {
     const transfersRepository = getCustomRepository(TransferRepository);
     const productLocalDonationRepository = getCustomRepository(
@@ -36,18 +38,18 @@ class CreateTransferService {
           product_id,
         },
       });
-      for (const productToTransfer of productsToTransfer) {
+      for (let i = 0; i < amount; i++) {
         const newTransfer = transfersRepository.create({
           origin_id,
           description,
           destiny_id,
-          product_local_donation_id: productToTransfer.id,
+          product_local_donation_id: productsToTransfer[i].id,
           active,
         });
         await transfersRepository.save(newTransfer);
         await productLocalDonationRepository.update(
           {
-            id: productToTransfer.id,
+            id: productsToTransfer[i].id,
           },
           {
             local_id: destiny_id,
