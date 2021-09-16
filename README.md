@@ -9,3 +9,5 @@ desde que o usuário seja `postgres`, a senha `docker` e a database `apaed`, rod
 o comando Docker para iniciar o banco é `docker run --name postgres -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -e POSTGRES_DB=apaed -p 5432:5432 -d postgres`.
 
 Com o banco de pé, digite `yarn setup` no projeto. Se nenhum erro aparecer, deu tudo certo. Agora, é só subir a aplicação com o comando `yarn dev:server`.
+
+Para as próximas vezes que for subir o projeto, é só digitar `yarn dev:server` para subir a aplicação. Caso precise zerar o banco, delete ele e repita o processo desse readME.
