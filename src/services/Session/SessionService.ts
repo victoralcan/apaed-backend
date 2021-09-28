@@ -66,6 +66,10 @@ export const GetSession = async (request, response): Promise<void> => {
     },
   });
 
+  if (!user) {
+    return response.status(500).send();
+  }
+
   // @ts-ignore
   delete user.password;
   // @ts-ignore
