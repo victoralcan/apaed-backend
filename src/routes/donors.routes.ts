@@ -12,7 +12,11 @@ const donorsRouter = Router();
 
 donorsRouter.get('/', async (request, response) => {
   const donorsRepository = getCustomRepository(DonorsRepository);
-  const donors = await donorsRepository.find();
+  const donors = await donorsRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(donors);
 });
@@ -21,7 +25,7 @@ donorsRouter.get('/:document', async (request, response) => {
   const { document } = request.params;
   const donorsRepository = getCustomRepository(DonorsRepository);
   const donor = await donorsRepository.findOne({
-    where: { document },
+    where: { document, active: true },
   });
 
   if (!donor) {

@@ -8,9 +8,14 @@ interface IRequestDTO {
 class DeleteUserService {
   public async execute({ id }: IRequestDTO): Promise<void> {
     const usersRepository = getCustomRepository(UsersRepository);
-    await usersRepository.delete({
-      id,
-    });
+    await usersRepository.update(
+      {
+        id,
+      },
+      {
+        active: false,
+      },
+    );
   }
 }
 

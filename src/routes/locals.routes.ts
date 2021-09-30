@@ -12,7 +12,11 @@ const localsRouter = Router();
 
 localsRouter.get('/', async (request, response) => {
   const localsRepository = getCustomRepository(LocalsRepository);
-  const locals = await localsRepository.find();
+  const locals = await localsRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(locals);
 });
@@ -24,7 +28,7 @@ localsRouter.get('/:id', async (request, response) => {
   }
   const localsRepository = getCustomRepository(LocalsRepository);
   const local = await localsRepository.findOne({
-    where: { id },
+    where: { id, active: true },
   });
 
   if (!local) {

@@ -11,7 +11,11 @@ const transferRouter = Router();
 
 transferRouter.get('/', async (request, response) => {
   const transferRepository = getCustomRepository(TransferRepository);
-  const transfer = await transferRepository.find();
+  const transfer = await transferRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(transfer);
 });
@@ -23,7 +27,7 @@ transferRouter.get('/:id', async (request, response) => {
   }
   const transferRepository = getCustomRepository(TransferRepository);
   const transfer = await transferRepository.findOne({
-    where: { id },
+    where: { id, active: true },
   });
 
   if (!transfer) {

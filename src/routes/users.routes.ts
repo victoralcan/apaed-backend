@@ -12,7 +12,11 @@ const usersRouter = Router();
 
 usersRouter.get('/', async (request, response) => {
   const usersRepository = getCustomRepository(UsersRepository);
-  const users = await usersRepository.find();
+  const users = await usersRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(users);
 });
@@ -24,7 +28,7 @@ usersRouter.get('/:id', async (request, response) => {
   }
   const usersRepository = getCustomRepository(UsersRepository);
   const user = await usersRepository.findOne({
-    where: { id },
+    where: { id, active: true },
   });
 
   if (!user) {

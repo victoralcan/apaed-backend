@@ -8,9 +8,14 @@ interface IRequestDTO {
 class DeleteNcmService {
   public async execute({ id }: IRequestDTO): Promise<void> {
     const ncmRepository = getCustomRepository(NcmRepository);
-    await ncmRepository.delete({
-      id,
-    });
+    await ncmRepository.update(
+      {
+        id,
+      },
+      {
+        active: false,
+      },
+    );
   }
 }
 

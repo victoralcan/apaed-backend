@@ -6,7 +6,11 @@ const typesRouter = Router();
 
 typesRouter.get('/', async (request, response) => {
   const typesRepository = getCustomRepository(TypesRepository);
-  const types = await typesRepository.find();
+  const types = await typesRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(types);
 });

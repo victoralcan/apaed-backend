@@ -8,9 +8,14 @@ interface IRequestDTO {
 class DeleteProductService {
   public async execute({ id }: IRequestDTO): Promise<void> {
     const productsRepository = getCustomRepository(ProductsRepository);
-    await productsRepository.delete({
-      id,
-    });
+    await productsRepository.update(
+      {
+        id,
+      },
+      {
+        active: false,
+      },
+    );
   }
 }
 

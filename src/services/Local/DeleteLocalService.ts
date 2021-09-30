@@ -8,9 +8,14 @@ interface IRequestDTO {
 class DeleteLocalService {
   public async execute({ id }: IRequestDTO): Promise<void> {
     const localsRepository = getCustomRepository(LocalsRepository);
-    await localsRepository.delete({
-      id,
-    });
+    await localsRepository.update(
+      {
+        id,
+      },
+      {
+        active: false,
+      },
+    );
   }
 }
 

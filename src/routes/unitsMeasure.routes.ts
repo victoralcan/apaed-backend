@@ -6,7 +6,11 @@ const unitsMeasureRouter = Router();
 
 unitsMeasureRouter.get('/', async (request, response) => {
   const unitsMeasureRepository = getCustomRepository(UnitsMeasureRepository);
-  const unitsMeasure = await unitsMeasureRepository.find();
+  const unitsMeasure = await unitsMeasureRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(unitsMeasure);
 });

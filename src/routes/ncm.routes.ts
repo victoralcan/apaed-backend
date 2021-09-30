@@ -12,7 +12,11 @@ const ncmRouter = Router();
 
 ncmRouter.get('/', async (request, response) => {
   const ncmRepository = getCustomRepository(NcmRepository);
-  const ncm = await ncmRepository.find();
+  const ncm = await ncmRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(ncm);
 });
@@ -24,7 +28,7 @@ ncmRouter.get('/:id', async (request, response) => {
   }
   const ncmRepository = getCustomRepository(NcmRepository);
   const ncm = await ncmRepository.findOne({
-    where: { id },
+    where: { id, active: true },
   });
 
   if (!ncm) {

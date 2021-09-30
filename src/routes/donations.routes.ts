@@ -12,7 +12,11 @@ const donationsRouter = Router();
 
 donationsRouter.get('/', async (request, response) => {
   const donationsRepository = getCustomRepository(DonationsRepository);
-  const donations = await donationsRepository.find();
+  const donations = await donationsRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(donations);
 });
@@ -26,7 +30,7 @@ donationsRouter.get('/:donor_id', async (request, response) => {
 
   const donationsRepository = getCustomRepository(DonationsRepository);
   const donations = await donationsRepository.find({
-    where: { donor_id },
+    where: { donor_id, active: true },
   });
 
   if (!donations || donations.length === 0) {

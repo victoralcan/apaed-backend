@@ -12,7 +12,11 @@ const productsRouter = Router();
 
 productsRouter.get('/', async (request, response) => {
   const productsRepository = getCustomRepository(ProductsRepository);
-  const products = await productsRepository.find();
+  const products = await productsRepository.find({
+    where: {
+      active: true,
+    },
+  });
 
   return response.json(products);
 });
@@ -23,6 +27,7 @@ productsRouter.get('/:ncm_id', async (request, response) => {
   const products = await productsRepository.find({
     where: {
       ncm_id,
+      active: true,
     },
   });
 

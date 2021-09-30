@@ -8,9 +8,14 @@ interface IRequestDTO {
 class DeleteDonorService {
   public async execute({ id }: IRequestDTO): Promise<void> {
     const donorsRepository = getCustomRepository(DonorsRepository);
-    await donorsRepository.delete({
-      id,
-    });
+    await donorsRepository.update(
+      {
+        id,
+      },
+      {
+        active: false,
+      },
+    );
   }
 }
 
