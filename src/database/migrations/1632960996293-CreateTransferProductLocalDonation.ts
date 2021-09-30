@@ -5,11 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateTransfer1630441111522 implements MigrationInterface {
+export class CreateTransferProductLocalDonation1632960996293
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'transfer',
+        name: 'transfer_product_local_donation',
         columns: [
           {
             name: 'id',
@@ -19,43 +20,13 @@ export default class CreateTransfer1630441111522 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'description',
-            type: 'varchar',
-          },
-          {
-            name: 'transfer_date',
-            type: 'date',
-            isNullable: false,
-            default: 'now()',
-          },
-          {
-            name: 'origin_id',
+            name: 'transfer_id',
             type: 'uuid',
             isNullable: false,
           },
           {
-            name: 'destiny_id',
+            name: 'product_local_donation_id',
             type: 'uuid',
-            isNullable: false,
-          },
-          {
-            name: 'product_name',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'product_brand',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'product_ncm_code',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'total_amount_transfered',
-            type: 'integer',
             isNullable: false,
           },
           {
@@ -79,24 +50,24 @@ export default class CreateTransfer1630441111522 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'transfer',
+      'transfer_product_local_donation',
       new TableForeignKey({
-        name: 'TransferOrigin',
-        columnNames: ['origin_id'],
+        name: 'TPLDT',
+        columnNames: ['transfer_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'locals',
+        referencedTableName: 'transfer',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
     );
 
     await queryRunner.createForeignKey(
-      'transfer',
+      'transfer_product_local_donation',
       new TableForeignKey({
-        name: 'TransferDestiny',
-        columnNames: ['destiny_id'],
+        name: 'TPLDPLD',
+        columnNames: ['product_local_donation_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'locals',
+        referencedTableName: 'product_local_donation',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
@@ -104,10 +75,16 @@ export default class CreateTransfer1630441111522 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('transfer', 'TransferOrigin');
+    await queryRunner.dropForeignKey(
+      'transfer_product_local_donation',
+      'TPLDT',
+    );
 
-    await queryRunner.dropForeignKey('transfer', 'TransferDestiny');
+    await queryRunner.dropForeignKey(
+      'transfer_product_local_donation',
+      'TPLDPLD',
+    );
 
-    await queryRunner.dropTable('transfer');
+    await queryRunner.dropTable('transfer_product_local_donation');
   }
 }

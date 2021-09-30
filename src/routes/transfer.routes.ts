@@ -34,7 +34,7 @@ transferRouter.get('/:id', async (request, response) => {
 
 transferRouter.post('/', async (request, response) => {
   if (!(await cadastroSchema.isValid(request.body))) {
-    return response.status(400).json({ error: 'Validation fails' });
+    return response.status(400).json({ error: 'Validation fails transfer' });
   }
 
   // @ts-ignore
@@ -44,24 +44,30 @@ transferRouter.post('/', async (request, response) => {
     destiny_id,
     product_id,
     description,
-    amount,
+    total_amount_transfered,
     active,
     expiration_date,
+    product_name,
+    product_brand,
+    product_ncm_code,
   } = request.body;
 
   const createTransfer = new CreateTransferService();
 
   try {
-    const transfers = await createTransfer.execute({
+    const transfer = await createTransfer.execute({
       origin_id: localId,
       destiny_id,
       product_id,
       description,
       active,
       expiration_date,
-      amount,
+      total_amount_transfered,
+      product_name,
+      product_brand,
+      product_ncm_code,
     });
-    if (!transfers || transfers.length === 0)
+    if (!transfer)
       return response
         .status(500)
         .json({ error: 'An error ocurred. Please try again!' });

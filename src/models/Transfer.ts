@@ -7,7 +7,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import Local from './Local';
-import ProductLocalDonation from './ProductLocalDonation';
 
 @Entity('transfer')
 class Transfer {
@@ -33,13 +32,19 @@ class Transfer {
   destiny: Local;
 
   @Column()
-  product_local_donation_id: string;
+  product_name: string;
+
+  @Column()
+  product_brand: string;
+
+  @Column()
+  product_ncm_code: string;
+
+  @Column()
+  total_amount_transfered: number;
 
   @Column('boolean')
   active: boolean;
-
-  @ManyToOne(() => ProductLocalDonation, { eager: true })
-  productLocalDonation: ProductLocalDonation;
 
   @CreateDateColumn()
   created_at: Date;
