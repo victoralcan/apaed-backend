@@ -9,6 +9,5 @@ export const cadastroSchema = Yup.object().shape({
   product_name: Yup.string().required(),
   product_brand: Yup.string().required(),
   product_ncm_code: Yup.string().required(),
-  expiration_date: Yup.string().required(),
   active: Yup.boolean().required(),
 });

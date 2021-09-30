@@ -34,7 +34,7 @@ transferRouter.get('/:id', async (request, response) => {
 
 transferRouter.post('/', async (request, response) => {
   if (!(await cadastroSchema.isValid(request.body))) {
-    return response.status(400).json({ error: 'Validation fails transfer' });
+    return response.status(400).json({ error: 'Validation fails' });
   }
 
   // @ts-ignore
