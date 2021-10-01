@@ -11,10 +11,15 @@ const transferRouter = Router();
 
 transferRouter.get('/', async (request, response) => {
   const transferRepository = getCustomRepository(TransferRepository);
-  const transfer = await transferRepository.find({
+  const { take = 10, skip = 0 } = request.query;
+
+  const transfer = await transferRepository.findAndCount({
+    // @ts-ignore
     where: {
       active: true,
     },
+    take,
+    skip,
   });
 
   return response.json(transfer);

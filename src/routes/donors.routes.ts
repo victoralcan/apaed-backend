@@ -12,10 +12,15 @@ const donorsRouter = Router();
 
 donorsRouter.get('/', async (request, response) => {
   const donorsRepository = getCustomRepository(DonorsRepository);
-  const donors = await donorsRepository.find({
+  const { take = 10, skip = 0 } = request.query;
+
+  const donors = await donorsRepository.findAndCount({
+    // @ts-ignore
     where: {
       active: true,
     },
+    take,
+    skip,
   });
 
   return response.json(donors);
