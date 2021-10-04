@@ -12,10 +12,14 @@ const localsRouter = Router();
 
 localsRouter.get('/', async (request, response) => {
   const localsRepository = getCustomRepository(LocalsRepository);
-  const locals = await localsRepository.find({
+  const { take = 10, skip = 0 } = request.query;
+  const locals = await localsRepository.findAndCount({
+    // @ts-ignore
     where: {
       active: true,
     },
+    take,
+    skip,
   });
 
   return response.json(locals);
