@@ -12,10 +12,15 @@ const ncmRouter = Router();
 
 ncmRouter.get('/', async (request, response) => {
   const ncmRepository = getCustomRepository(NcmRepository);
-  const ncm = await ncmRepository.find({
+  const { take = 10, skip = 0 } = request.query;
+
+  const ncm = await ncmRepository.findAndCount({
+    // @ts-ignore
     where: {
       active: true,
     },
+    take,
+    skip,
   });
 
   return response.json(ncm);
