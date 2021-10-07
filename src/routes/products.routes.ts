@@ -12,10 +12,15 @@ const productsRouter = Router();
 
 productsRouter.get('/', async (request, response) => {
   const productsRepository = getCustomRepository(ProductsRepository);
-  const products = await productsRepository.find({
+  const { take = 10, skip = 0 } = request.query;
+
+  const products = await productsRepository.findAndCount({
+    // @ts-ignore
     where: {
       active: true,
     },
+    take,
+    skip,
   });
 
   return response.json(products);
