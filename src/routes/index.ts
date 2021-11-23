@@ -11,6 +11,7 @@ import ncmRouter from './ncm.routes';
 import productsRouter from './products.routes';
 import productLocalDonationRouter from './productLocalDonation.routes';
 import transferRouter from './transfer.routes';
+import productsBazarRouter from './productsBazar.routes';
 import { GetSession, CreateSession } from '../services/Session/SessionService';
 
 const routes = Router();
@@ -38,6 +39,8 @@ routes.use('/types', typesRouter);
 routes.use('/ncm', ncmRouter);
 
 routes.use('/products', productsRouter);
+
+routes.use('/productsBazar', productsBazarRouter);
 
 routes.use('/stock', productLocalDonationRouter);
 

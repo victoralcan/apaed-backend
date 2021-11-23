@@ -12,6 +12,7 @@ import createTypes from './Types';
 import createNcm from './Ncm';
 import createProducts from './Product';
 import createProductLocalDonation from './ProductLocalDonation';
+import createProductBazar from './ProductBazar';
 
 const adminRoleId = uuidV4();
 const userRoleId = uuidV4();
@@ -61,6 +62,9 @@ const productLocalDonation3Id = uuidV4();
 const productLocalDonation4Id = uuidV4();
 const productLocalDonation5Id = uuidV4();
 const productLocalDonation6Id = uuidV4();
+
+const productBazar1Id = uuidV4();
+const productBazar2Id = uuidV4();
 
 async function execute() {
   try {
@@ -183,6 +187,12 @@ async function execute() {
       product3Id,
       product1Id,
       product4Id,
+    );
+    await createProductBazar(
+      productBazar1Id,
+      productBazar2Id,
+      product1Id,
+      product2Id,
     );
   } catch (e) {
     console.log(e);
