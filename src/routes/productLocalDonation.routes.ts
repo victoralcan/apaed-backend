@@ -20,7 +20,8 @@ productLocalDonationRouter.get('/', async (request, response) => {
   );
 
   const productLocalDonation = await productLocalDonationRepository.query(
-    'select count(*), MIN(pld.id) as id, n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
+    'select count(*), MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, MIN(n.minimal_qntt) as minimal_qntt,' +
+      'MIN(n.id) as ncm_id, n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
       ' from product_local_donation pld' +
       ' left outer join product p on pld.product_id = p.id' +
       ' left outer join ncm n on p.ncm_id = n.id' +
@@ -41,8 +42,8 @@ productLocalDonationRouter.get('/', async (request, response) => {
           // @ts-ignore
           { local_id: request.localId },
         )
-        .andWhere('product_local_donation.product_id = :product_id', {
-          product_id: product.product_id,
+        .andWhere('product_local_donation.ncm_id = :ncm_id', {
+          ncm_id: product.ncm_id,
         })
         .groupBy('product_id')
         .getCount();
@@ -54,7 +55,9 @@ productLocalDonationRouter.get('/', async (request, response) => {
   );
 
   const count = await productLocalDonationRepository.query(
-    'SELECT COUNT(*) FROM (select count(*), MIN(pld.id) as id, n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
+    'SELECT COUNT(*) FROM (select count(*), MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, ' +
+      'MIN(n.minimal_qntt) as minimal_qntt, ' +
+      'n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
       ' from product_local_donation pld' +
       ' left outer join product p on pld.product_id = p.id' +
       ' left outer join ncm n on p.ncm_id = n.id' +
@@ -102,6 +105,7 @@ productLocalDonationRouter.post('/', async (request, response) => {
     product_id,
     expiration_date,
     donation_id,
+    ncm_id,
     amount,
     active,
   } = request.body;
@@ -114,6 +118,7 @@ productLocalDonationRouter.post('/', async (request, response) => {
         local_id: localId,
         product_id,
         expiration_date,
+        ncm_id,
         donation_id,
         active,
       });
@@ -137,13 +142,21 @@ productLocalDonationRouter.put('/', async (request, response) => {
 
   // @ts-ignore
   const { localId } = request;
-  const { id, product_id, expiration_date, donation_id, active } = request.body;
+  const {
+    id,
+    product_id,
+    expiration_date,
+    donation_id,
+    ncm_id,
+    active,
+  } = request.body;
 
   const productLocalDonationToUpdate = {
     id,
     product_id,
     expiration_date,
     donation_id,
+    ncm_id,
     active,
     local_id: localId,
   };

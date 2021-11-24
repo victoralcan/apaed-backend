@@ -7,6 +7,7 @@ interface IRequestDTO {
   expiration_date: string;
   donation_id: string;
   local_id: string;
+  ncm_id: string;
   active: boolean;
 }
 
@@ -25,6 +26,7 @@ class CreateProductLocalDonationService {
       await productLocalDonationRepository.save(newProductLocalDonation);
       return newProductLocalDonation;
     } catch (e) {
+      console.log(e);
       return undefined;
     }
   }

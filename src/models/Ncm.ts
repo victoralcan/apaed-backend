@@ -26,6 +26,9 @@ class Ncm {
   @Column()
   type_id: string;
 
+  @Column('integer')
+  minimal_more_products: number;
+
   @ManyToOne(() => Type, { eager: true })
   type: Type;
 

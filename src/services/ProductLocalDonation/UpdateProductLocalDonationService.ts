@@ -8,6 +8,7 @@ interface IRequestDTO {
   expiration_date: string;
   donation_id: string;
   local_id: string;
+  ncm_id: string;
   active: boolean;
 }
 

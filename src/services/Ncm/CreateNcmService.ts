@@ -7,6 +7,7 @@ interface IRequestDTO {
   type_id: string;
   unity_measurement_id: string;
   minimal_qntt: number;
+  minimal_more_products: number;
   ncm_code: string;
   long_description: string;
   active: boolean;

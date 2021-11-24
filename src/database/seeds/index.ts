@@ -187,6 +187,12 @@ async function execute() {
       product3Id,
       product1Id,
       product4Id,
+      ncm1Id,
+      ncm2Id,
+      ncm2Id,
+      ncm3Id,
+      ncm1Id,
+      ncm5Id,
     );
     await createProductBazar(
       productBazar1Id,

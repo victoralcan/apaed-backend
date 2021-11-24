@@ -27,22 +27,22 @@ export default class CreateProductLocalDonation1630440914508
           {
             name: 'donation_id',
             type: 'uuid',
-            isNullable: false,
           },
           {
             name: 'local_id',
             type: 'uuid',
-            isNullable: false,
           },
           {
             name: 'product_id',
             type: 'uuid',
-            isNullable: false,
+          },
+          {
+            name: 'ncm_id',
+            type: 'uuid',
           },
           {
             name: 'active',
             type: 'boolean',
-            isNullable: false,
             default: true,
           },
           {

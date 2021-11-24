@@ -21,37 +21,34 @@ export default class CreateNcm1630440634444 implements MigrationInterface {
           {
             name: 'description',
             type: 'varchar',
-            isNullable: false,
           },
           {
             name: 'long_description',
             type: 'varchar',
-            isNullable: false,
           },
           {
             name: 'minimal_qntt',
             type: 'decimal',
-            isNullable: false,
+          },
+          {
+            name: 'minimal_more_products',
+            type: 'integer',
           },
           {
             name: 'ncm_code',
             type: 'varchar',
-            isNullable: false,
           },
           {
             name: 'type_id',
             type: 'uuid',
-            isNullable: false,
           },
           {
             name: 'unity_measurement_id',
             type: 'uuid',
-            isNullable: false,
           },
           {
             name: 'active',
             type: 'boolean',
-            isNullable: false,
             default: true,
           },
           {

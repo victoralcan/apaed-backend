@@ -27,6 +27,9 @@ class ProductLocalDonation {
   @Column()
   local_id: string;
 
+  @Column()
+  ncm_id: string;
+
   @ManyToOne(() => Local, { eager: true })
   local: Local;
 
