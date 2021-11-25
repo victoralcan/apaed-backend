@@ -13,6 +13,7 @@ import productLocalDonationRouter from './productLocalDonation.routes';
 import transferRouter from './transfer.routes';
 import productsBazarRouter from './productsBazar.routes';
 import { GetSession, CreateSession } from '../services/Session/SessionService';
+import foodStampsRouter from './foodStamp.routes';
 
 const routes = Router();
 
@@ -45,5 +46,7 @@ routes.use('/productsBazar', productsBazarRouter);
 routes.use('/stock', productLocalDonationRouter);
 
 routes.use('/transfer', transferRouter);
+
+routes.use('/foodStamp', foodStampsRouter);
 
 export default routes;

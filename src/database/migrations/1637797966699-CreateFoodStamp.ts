@@ -5,12 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class CreateTransferProductLocalDonation1632960996293
+export default class CreateFoodStamp1637797966699
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'transfer_product_local_donation',
+        name: 'food_stamp',
         columns: [
           {
             name: 'id',
@@ -20,19 +20,20 @@ export class CreateTransferProductLocalDonation1632960996293
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'transfer_id',
-            type: 'uuid',
-            isNullable: false,
+            name: 'type',
+            type: 'varchar',
           },
           {
-            name: 'product_local_donation_id',
+            name: 'open',
+            type: 'boolean',
+          },
+          {
+            name: 'product_id',
             type: 'uuid',
-            isNullable: false,
           },
           {
             name: 'active',
             type: 'boolean',
-            isNullable: false,
             default: true,
           },
           {
@@ -50,24 +51,12 @@ export class CreateTransferProductLocalDonation1632960996293
     );
 
     await queryRunner.createForeignKey(
-      'transfer_product_local_donation',
+      'food_stamp',
       new TableForeignKey({
-        name: 'TPLDT',
-        columnNames: ['transfer_id'],
+        name: 'FoodStamp',
+        columnNames: ['product_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'transfer',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-      }),
-    );
-
-    await queryRunner.createForeignKey(
-      'transfer_product_local_donation',
-      new TableForeignKey({
-        name: 'TPLDPLD',
-        columnNames: ['product_local_donation_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'product_local_donation',
+        referencedTableName: 'product',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
@@ -75,16 +64,8 @@ export class CreateTransferProductLocalDonation1632960996293
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey(
-      'transfer_product_local_donation',
-      'TPLDT',
-    );
+    await queryRunner.dropForeignKey('food_stamp', 'FoodStamp');
 
-    await queryRunner.dropForeignKey(
-      'transfer_product_local_donation',
-      'TPLDPLD',
-    );
-
-    await queryRunner.dropTable('transfer_product_local_donation');
+    await queryRunner.dropTable('food_stamp');
   }
 }

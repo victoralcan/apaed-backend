@@ -13,6 +13,7 @@ import createNcm from './Ncm';
 import createProducts from './Product';
 import createProductLocalDonation from './ProductLocalDonation';
 import createProductBazar from './ProductBazar';
+import createFoodStamp from './FoodStamp';
 
 const adminRoleId = uuidV4();
 const userRoleId = uuidV4();
@@ -65,6 +66,8 @@ const productLocalDonation6Id = uuidV4();
 
 const productBazar1Id = uuidV4();
 const productBazar2Id = uuidV4();
+
+const foodStamp1Id = uuidV4();
 
 async function execute() {
   try {
@@ -200,6 +203,7 @@ async function execute() {
       product1Id,
       product2Id,
     );
+    await createFoodStamp(foodStamp1Id, product1Id, product2Id, product3Id);
   } catch (e) {
     console.log(e);
     throw new Error();
