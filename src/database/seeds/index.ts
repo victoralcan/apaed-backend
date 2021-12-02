@@ -133,6 +133,7 @@ async function execute() {
       unityMeasurement4Id,
       unityMeasurement5Id,
     );
+    await createFoodStamp(foodStamp1Id);
     await createTypes(type1Id, type2Id, type3Id);
     await createNcm(
       ncm1Id,
@@ -196,6 +197,7 @@ async function execute() {
       ncm3Id,
       ncm1Id,
       ncm5Id,
+      foodStamp1Id,
     );
     await createProductBazar(
       productBazar1Id,
@@ -203,7 +205,6 @@ async function execute() {
       product1Id,
       product2Id,
     );
-    await createFoodStamp(foodStamp1Id, product1Id, product2Id, product3Id);
   } catch (e) {
     console.log(e);
     throw new Error();

@@ -111,7 +111,6 @@ export default class CreateProductLocalDonation1630440914508
       'product_local_donation',
       'ProductLocalDonationProduct',
     );
-
     await queryRunner.dropTable('product_local_donation');
   }
 }

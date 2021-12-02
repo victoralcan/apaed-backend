@@ -1,11 +1,6 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableForeignKey,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateFoodStamp1637797966699
+export default class CreateFoodStamp1638215341047
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -24,13 +19,18 @@ export default class CreateFoodStamp1637797966699
             type: 'varchar',
           },
           {
-            name: 'open',
-            type: 'boolean',
+            name: 'name',
+            type: 'varchar',
           },
           {
-            name: 'product_id',
-            type: 'uuid',
+            name: 'open',
+            type: 'boolean',
+            default: false,
           },
+          // {
+          //   name: 'product_local_donation_id',
+          //   type: 'uuid',
+          // },
           {
             name: 'active',
             type: 'boolean',
@@ -50,21 +50,21 @@ export default class CreateFoodStamp1637797966699
       }),
     );
 
-    await queryRunner.createForeignKey(
+    /* await queryRunner.createForeignKey(
       'food_stamp',
       new TableForeignKey({
-        name: 'FoodStamp',
-        columnNames: ['product_id'],
+        name: 'FoodStampProduct',
+        columnNames: ['product_local_donation_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'product',
+        referencedTableName: 'product_local_donation',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
-    );
+    ); */
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('food_stamp', 'FoodStamp');
+    // await queryRunner.dropForeignKey('food_stamp', 'FoodStampProduct');
 
     await queryRunner.dropTable('food_stamp');
   }

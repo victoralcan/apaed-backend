@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import FoodStamp from './FoodStamp';
 import Ncm from './Ncm';
 
 @Entity('product')
@@ -25,12 +24,6 @@ class Product {
 
   @ManyToOne(() => Ncm, { eager: true })
   ncm: Ncm;
-
-  /*  @Column()
-  foodStamp_id: string;
-
-  @ManyToOne(() => FoodStamp, { eager: true })
-  foodStamp: FoodStamp; */
 
   @Column('boolean')
   active: boolean;

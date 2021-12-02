@@ -4,9 +4,9 @@ import FoodStampRepository from '../../repositories/FoodStampRepository';
 
 interface IRequestDTO {
   id: string;
+  name: string;
   type: string;
   open: boolean;
-  product_id: string;
   active: boolean;
 }
 

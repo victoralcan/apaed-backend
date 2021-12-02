@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import Donation from './Donation';
+import FoodStamp from './FoodStamp';
 import Local from './Local';
 import Product from './Product';
 
@@ -38,6 +39,12 @@ class ProductLocalDonation {
 
   @ManyToOne(() => Product, { eager: true })
   product: Product;
+
+  @Column()
+  food_stamp_id: string;
+
+  @ManyToOne(() => FoodStamp, { eager: true })
+  food_stamp: FoodStamp;
 
   @Column('boolean')
   active: boolean;

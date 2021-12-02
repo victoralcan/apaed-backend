@@ -2,26 +2,14 @@ import { createConnection } from 'typeorm';
 
 export default async function create(
   foodStamp1Id: string,
-  product1Id: string,
-  product2Id: string,
-  product3Id: string,
+  // product_local_donation_id: string,
 ): Promise<void> {
   const connection = await createConnection();
 
   await connection.query(`
-  INSERT INTO FOOD_STAMP(id, type, open, product_id) 
-  values ('${foodStamp1Id}', 'Completa', true, '${product1Id}');
+  INSERT INTO FOOD_STAMP(id, name, type, open)
+  values ('${foodStamp1Id}', 'Cesta 1', 'Completa', true);
   `);
-
-  //   await connection.query(`
-  //   INSERT INTO FOOD_STAMP(id, type, open, product_id)
-  //   values ('${foodStamp1Id}', 'Completa', true, '${product2Id}');
-  //   `);
-
-  //   await connection.query(`
-  //   INSERT INTO FOOD_STAMP(id, type, open, product_id)
-  //   values ('${foodStamp1Id}', 'Completa', true, '${product3Id}');
-  //   `);
 
   await connection.close();
 

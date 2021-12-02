@@ -2,13 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Product from './Product';
 
-@Entity('foodStamp')
+@Entity('food_stamp')
 class FoodStamp {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -16,14 +14,17 @@ class FoodStamp {
   @Column()
   type: string;
 
+  @Column()
+  name: string;
+
   @Column('boolean')
   open: boolean;
-
+  /* 
   @Column()
-  product_id: string;
+  product_local_donation_id: string;
 
-  @ManyToOne(() => Product, { eager: true })
-  product: Product;
+  @OneToMany(() => ProductLocalDonation, pld => pld.food_stamp_id)
+  product_local_donation: ProductLocalDonation[]; */
 
   @Column('boolean')
   active: boolean;

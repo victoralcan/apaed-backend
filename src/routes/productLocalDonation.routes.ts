@@ -26,6 +26,7 @@ productLocalDonationRouter.get('/', async (request, response) => {
       ' left outer join product p on pld.product_id = p.id' +
       ' left outer join ncm n on p.ncm_id = n.id' +
       ' left outer join units_measure um on n.unity_measurement_id = um.id' +
+      ' left outer join food_stamp fs on pld.food_stamp_id = fs.id' +
       ' where local_id = $1' +
       'group by product_id, expiration_date, n.ncm_code, p.name, p.brand, um.unity_measurement LIMIT $2 OFFSET $3',
     // @ts-ignore
@@ -61,6 +62,7 @@ productLocalDonationRouter.get('/', async (request, response) => {
       ' from product_local_donation pld' +
       ' left outer join product p on pld.product_id = p.id' +
       ' left outer join ncm n on p.ncm_id = n.id' +
+      ' left outer join food_stamp fs on pld.food_stamp_id = fs.id' +
       ' left outer join units_measure um on n.unity_measurement_id = um.id' +
       ' where local_id = $1' +
       'group by product_id, expiration_date, n.ncm_code, p.name, p.brand, um.unity_measurement) as totalCount',
@@ -106,6 +108,7 @@ productLocalDonationRouter.post('/', async (request, response) => {
     expiration_date,
     donation_id,
     ncm_id,
+    food_stamp_id,
     amount,
     active,
   } = request.body;
@@ -119,6 +122,7 @@ productLocalDonationRouter.post('/', async (request, response) => {
         product_id,
         expiration_date,
         ncm_id,
+        food_stamp_id,
         donation_id,
         active,
       });
@@ -148,6 +152,7 @@ productLocalDonationRouter.put('/', async (request, response) => {
     expiration_date,
     donation_id,
     ncm_id,
+    food_stamp_id,
     active,
   } = request.body;
 
@@ -157,6 +162,7 @@ productLocalDonationRouter.put('/', async (request, response) => {
     expiration_date,
     donation_id,
     ncm_id,
+    food_stamp_id,
     active,
     local_id: localId,
   };

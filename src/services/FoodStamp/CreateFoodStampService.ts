@@ -4,8 +4,8 @@ import FoodStamp from '../../models/FoodStamp';
 
 interface IRequestDTO {
   type: string;
+  name: string;
   open: boolean;
-  product_id: string;
   active: boolean;
 }
 

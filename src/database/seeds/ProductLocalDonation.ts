@@ -31,37 +31,38 @@ export default async function create(
   productLocalDonation4NcmId: string,
   productLocalDonation5NcmId: string,
   productLocalDonation6NcmId: string,
+  foodStamp1Id: string,
 ): Promise<void> {
   const connection = await createConnection();
 
   await connection.query(`
-  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, expiration_date, ncm_id) 
+  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, expiration_date, ncm_id, food_stamp_id) 
   values ('${productLocalDonation1Id}', '${productLocalDonation1DonationId}','${productLocalDonation1LocalId}', 
-          '${productLocalDonation1ProductId}', 'now()', '${productLocalDonation1NcmId}');
+          '${productLocalDonation1ProductId}', 'now()', '${productLocalDonation1NcmId}', '${foodStamp1Id}');
   `);
 
   await connection.query(`
-  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, expiration_date, ncm_id) 
+  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, expiration_date, ncm_id, food_stamp_id) 
   values ('${productLocalDonation2Id}', '${productLocalDonation2DonationId}','${productLocalDonation2LocalId}', 
-          '${productLocalDonation2ProductId}', 'now()', '${productLocalDonation2NcmId}');
+          '${productLocalDonation2ProductId}', 'now()', '${productLocalDonation2NcmId}', '${foodStamp1Id}');
   `);
 
   await connection.query(`
-  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, expiration_date, ncm_id) 
+  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, expiration_date, ncm_id, food_stamp_id) 
   values ('${productLocalDonation3Id}', '${productLocalDonation3DonationId}','${productLocalDonation3LocalId}', 
-          '${productLocalDonation3ProductId}', 'now()', '${productLocalDonation3NcmId}');
+          '${productLocalDonation3ProductId}', 'now()', '${productLocalDonation3NcmId}', '${foodStamp1Id}');
   `);
 
   await connection.query(`
-  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, ncm_id) 
+  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, ncm_id, food_stamp_id) 
   values ('${productLocalDonation4Id}', '${productLocalDonation4DonationId}','${productLocalDonation4LocalId}',
-          '${productLocalDonation4ProductId}', '${productLocalDonation4NcmId}');
+          '${productLocalDonation4ProductId}', '${productLocalDonation4NcmId}', '${foodStamp1Id}');
   `);
 
   await connection.query(`
-  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, expiration_date, ncm_id) 
+  INSERT INTO PRODUCT_LOCAL_DONATION(id, donation_id, local_id, product_id, expiration_date, ncm_id, food_stamp_id) 
   values ('${productLocalDonation5Id}', '${productLocalDonation5DonationId}','${productLocalDonation5LocalId}',
-          '${productLocalDonation5ProductId}', 'now()', '${productLocalDonation5NcmId}');
+          '${productLocalDonation5ProductId}', 'now()', '${productLocalDonation5NcmId}', '${foodStamp1Id}');
   `);
 
   await connection.query(`

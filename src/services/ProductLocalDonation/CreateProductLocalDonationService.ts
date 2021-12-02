@@ -8,6 +8,7 @@ interface IRequestDTO {
   donation_id: string;
   local_id: string;
   ncm_id: string;
+  food_stamp_id: string;
   active: boolean;
 }
 
