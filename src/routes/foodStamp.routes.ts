@@ -30,7 +30,7 @@ foodStampsRouter.post('/', async (request, response) => {
     return response.status(400).json({ error: 'Validation fails' });
   }
 
-  const { type, open, active } = request.body;
+  const { name, type, open, active } = request.body;
   const createFoodStamp = new CreateFoodStampService();
 
   let newFoodStamp;
@@ -60,7 +60,7 @@ foodStampsRouter.put('/', async (request, response) => {
     return response.status(400).json({ error: 'Validation fails' });
   }
 
-  const { id, type, open, active } = request.body;
+  const { name, id, type, open, active } = request.body;
 
   const foodStampToUpdate = {
     id,
