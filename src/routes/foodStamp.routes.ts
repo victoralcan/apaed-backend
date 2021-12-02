@@ -25,6 +25,22 @@ foodStampsRouter.get('/', async (request, response) => {
   return response.json(foodStamps);
 });
 
+foodStampsRouter.get('/:id', async (request, response) => {
+  const { id } = request.params;
+  if (!validate(id)) {
+    return response.status(400).json({ error: 'Invalid Id' });
+  }
+  const foodStampRepository = getCustomRepository(FoodStampRepository);
+  const local = await foodStampRepository.findOne({
+    where: { id, active: true },
+  });
+
+  if (!local) {
+    return response.status(404).json({ error: 'FoodStamp does not exists' });
+  }
+  return response.json(local);
+});
+
 foodStampsRouter.post('/', async (request, response) => {
   if (!(await cadastroSchema.isValid(request.body))) {
     return response.status(400).json({ error: 'Validation fails' });
