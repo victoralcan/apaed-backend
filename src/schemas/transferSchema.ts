@@ -11,10 +11,3 @@ export const cadastroSchema = Yup.object().shape({
   product_ncm_code: Yup.string().required(),
   active: Yup.boolean().required(),
 });
-
-export const cadastroFoodStampSchema = Yup.object().shape({
-  product_id: Yup.string().required(),
-  active: Yup.boolean().required(),
-  total_amount_transfered: Yup.string().required(),
-  food_stamp_id: Yup.string().required(),
-});
