@@ -20,7 +20,7 @@ productLocalDonationRouter.get('/', async (request, response) => {
   );
 
   const productLocalDonation = await productLocalDonationRepository.query(
-    'select count(*), MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, MIN(n.minimal_qntt) as minimal_qntt,' +
+    'select count(*), MIN(pld.food_stamp_id) as food_stamp_id, MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, MIN(n.minimal_qntt) as minimal_qntt,' +
       'MIN(n.id) as ncm_id, n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
       ' from product_local_donation pld' +
       ' left outer join product p on pld.product_id = p.id' +
@@ -33,9 +33,14 @@ productLocalDonationRouter.get('/', async (request, response) => {
     [request.localId, take, skip],
   );
 
+  const filteredProductLocalDonation = productLocalDonation.filter(
+    // @ts-ignore
+    product => !product.food_stamp_id,
+  );
+
   const productLocalDonationWithTotalAmount = await Promise.all(
     // @ts-ignore
-    productLocalDonation.map(async product => {
+    filteredProductLocalDonation.map(async product => {
       const count = await productLocalDonationRepository
         .createQueryBuilder('product_local_donation')
         .where(
