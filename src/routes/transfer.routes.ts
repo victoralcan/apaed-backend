@@ -1,11 +1,15 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { validate } from 'uuid';
-import { cadastroSchema } from '../schemas/transferSchema';
+import {
+  cadastroFoodStampSchema,
+  cadastroSchema,
+} from '../schemas/transferSchema';
 
 import TransferRepository from '../repositories/TransferRepository';
 import CreateTransferService from '../services/Transfer/CreateTransferService';
 import DeleteTransferService from '../services/Transfer/DeleteTransferService';
+import CreateTransferFoodStampService from '../services/Transfer/CreateTransferFoodStampService';
 
 const transferRouter = Router();
 
@@ -97,6 +101,46 @@ transferRouter.delete('/:id', async (request, response) => {
   await deleteTransfer.execute({ id });
 
   return response.status(204).send();
+});
+
+transferRouter.post('/foodStamp', async (request, response) => {
+  if (!(await cadastroFoodStampSchema.isValid(request.body))) {
+    return response.status(400).json({ error: 'Validation fails' });
+  }
+
+  // @ts-ignore
+  const { localId } = request;
+  const {
+    product_id,
+    active,
+    expiration_date,
+    total_amount_transfered,
+    food_stamp_id,
+  } = request.body;
+
+  const createTransferFoodStamp = new CreateTransferFoodStampService();
+
+  try {
+    const transfer = await createTransferFoodStamp.execute({
+      local_id: localId,
+      product_id,
+      active,
+      expiration_date,
+      total_amount_transfered,
+      food_stamp_id,
+    });
+    if (!transfer)
+      return response
+        .status(500)
+        .json({ error: 'An error ocurred. Please try again!' });
+  } catch (e) {
+    console.log(e);
+    throw new Error();
+  }
+
+  return response.json({
+    message: 'Food stamp transaction added successfully!',
+  });
 });
 
 export default transferRouter;

@@ -101,6 +101,37 @@ productLocalDonationRouter.get('/:id', async (request, response) => {
   return response.json(productLocalDonation);
 });
 
+productLocalDonationRouter.get(
+  '/foodStamp/:food_stamp_id',
+  async (request, response) => {
+    const { food_stamp_id } = request.params;
+    if (!validate(food_stamp_id)) {
+      return response.status(400).json({ error: 'Invalid Id' });
+    }
+    const productLocalDonationRepository = getCustomRepository(
+      ProductLocalDonationRepository,
+    );
+    const { take = 10, skip = 0 } = request.query;
+    const productLocalDonation = await productLocalDonationRepository.findAndCount(
+      {
+        // @ts-ignore
+        where: {
+          food_stamp_id,
+        },
+        take,
+        skip,
+      },
+    );
+
+    if (!productLocalDonation) {
+      return response
+        .status(404)
+        .json({ error: 'ProductLocalDonation does not exists' });
+    }
+    return response.json(productLocalDonation);
+  },
+);
+
 productLocalDonationRouter.post('/', async (request, response) => {
   if (!(await cadastroSchema.isValid(request.body))) {
     return response.status(400).json({ error: 'Validation fails' });
