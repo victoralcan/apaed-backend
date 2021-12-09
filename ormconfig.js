@@ -2,6 +2,7 @@ const SnakeNamingStrategy = require('typeorm-naming-strategies')
   .SnakeNamingStrategy;
 
 module.exports = {
+  "url": process.env.DATABASE_URL,
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
@@ -9,13 +10,20 @@ module.exports = {
   "password": "docker",
   "database": "apaed",
   namingStrategy: new SnakeNamingStrategy(),
+  "ssl": true,
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  },
   "entities": [
-    "./src/models/*.ts"
+    "./dist/models/*.js"
   ],
   "migrations": [
-    "./src/database/migrations/*.ts"
+    "./dist/database/migrations/*.js"
   ],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./src/database/migrations",
+    "entitiesDir": "./src/models",
   }
 };
