@@ -61,23 +61,22 @@ productLocalDonationRouter.get('/', async (request, response) => {
   );
 
   const count = await productLocalDonationRepository.query(
-    'SELECT COUNT(*) FROM (select count(*), MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, ' +
-      'MIN(n.minimal_qntt) as minimal_qntt, ' +
-      'n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
+    'select count(*), MIN(pld.food_stamp_id) as food_stamp_id, MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, MIN(n.minimal_qntt) as minimal_qntt,' +
+      'MIN(n.id) as ncm_id, n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
       ' from product_local_donation pld' +
       ' left outer join product p on pld.product_id = p.id' +
       ' left outer join ncm n on p.ncm_id = n.id' +
-      ' left outer join food_stamp fs on pld.food_stamp_id = fs.id' +
       ' left outer join units_measure um on n.unity_measurement_id = um.id' +
+      ' left outer join food_stamp fs on pld.food_stamp_id = fs.id' +
       ' where local_id = $1' +
-      'group by product_id, expiration_date, n.ncm_code, p.name, p.brand, um.unity_measurement) as totalCount',
+      'group by product_id, expiration_date, n.ncm_code, p.name, p.brand, um.unity_measurement',
     // @ts-ignore
     [request.localId],
   );
 
   return response.json([
     [...productLocalDonationWithTotalAmount],
-    Number(count[0].count),
+    count.length,
   ]);
 });
 
