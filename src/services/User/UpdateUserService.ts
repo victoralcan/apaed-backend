@@ -16,6 +16,16 @@ class UpdateUserService {
   public async execute(toUpdateUser: IRequestDTO): Promise<User | undefined> {
     const usersRepository = getCustomRepository(UsersRepository);
 
+    const existUser = await usersRepository.findOne({
+      where: {
+        name: toUpdateUser.name,
+      },
+    });
+
+    if (existUser) {
+      throw new Error('Nome já registrado na base de dados');
+    }
+
     if (toUpdateUser.password) {
       const salt = await genSalt(10);
 
