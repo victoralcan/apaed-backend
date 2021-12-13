@@ -93,8 +93,15 @@ usersRouter.put('/', async (request, response) => {
     return response.status(400).json({ error: 'Invalid Id' });
   }
 
-  const updateUser = new UpdateUserService();
-  const updatedUser = await updateUser.execute(userToUpdate);
+  let updatedUser;
+
+  try {
+    const updateUser = new UpdateUserService();
+    updatedUser = await updateUser.execute(userToUpdate);
+  } catch (e) {
+    console.log(e);
+    return response.status(500).json({ error: e.message });
+  }
 
   if (!updatedUser) {
     return response
