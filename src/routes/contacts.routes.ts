@@ -68,7 +68,7 @@ contactsRouter.post('/', async (request, response) => {
     });
   } catch (e) {
     return response.status(500).json({
-      error: `Contact with zip code already registered in the database`,
+      error: 'An error ocurred. Please try again!',
     });
   }
 

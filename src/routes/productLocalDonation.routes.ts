@@ -20,27 +20,22 @@ productLocalDonationRouter.get('/', async (request, response) => {
   );
 
   const productLocalDonation = await productLocalDonationRepository.query(
-    'select count(*), MIN(pld.food_stamp_id) as food_stamp_id, MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, MIN(n.minimal_qntt) as minimal_qntt,' +
+    'select count(*), food_stamp_id, MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, MIN(n.minimal_qntt) as minimal_qntt,' +
       'MIN(n.id) as ncm_id, n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
       ' from product_local_donation pld' +
       ' left outer join product p on pld.product_id = p.id' +
       ' left outer join ncm n on p.ncm_id = n.id' +
       ' left outer join units_measure um on n.unity_measurement_id = um.id' +
       ' left outer join food_stamp fs on pld.food_stamp_id = fs.id' +
-      ' where local_id = $1' +
-      'group by product_id, expiration_date, n.ncm_code, p.name, p.brand, um.unity_measurement LIMIT $2 OFFSET $3',
+      ' where local_id = $1 and food_stamp_id is NULL ' +
+      'group by product_id, expiration_date, n.ncm_code, p.name, p.brand, um.unity_measurement, food_stamp_id LIMIT $2 OFFSET $3',
     // @ts-ignore
     [request.localId, take, skip],
   );
 
-  const filteredProductLocalDonation = productLocalDonation.filter(
-    // @ts-ignore
-    product => !product.food_stamp_id,
-  );
-
   const productLocalDonationWithTotalAmount = await Promise.all(
     // @ts-ignore
-    filteredProductLocalDonation.map(async product => {
+    productLocalDonation.map(async product => {
       const count = await productLocalDonationRepository
         .createQueryBuilder('product_local_donation')
         .where(
@@ -61,15 +56,15 @@ productLocalDonationRouter.get('/', async (request, response) => {
   );
 
   const count = await productLocalDonationRepository.query(
-    'select count(*), MIN(pld.food_stamp_id) as food_stamp_id, MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, MIN(n.minimal_qntt) as minimal_qntt,' +
+    'select count(*), food_stamp_id, MIN(pld.id) as id, MIN(n.minimal_more_products) as minimal_more_products, MIN(n.minimal_qntt) as minimal_qntt,' +
       'MIN(n.id) as ncm_id, n.ncm_code, expiration_date, p.name, p.brand, product_id, um.unity_measurement' +
       ' from product_local_donation pld' +
       ' left outer join product p on pld.product_id = p.id' +
       ' left outer join ncm n on p.ncm_id = n.id' +
       ' left outer join units_measure um on n.unity_measurement_id = um.id' +
       ' left outer join food_stamp fs on pld.food_stamp_id = fs.id' +
-      ' where local_id = $1' +
-      'group by product_id, expiration_date, n.ncm_code, p.name, p.brand, um.unity_measurement',
+      ' where local_id = $1 and food_stamp_id is NULL ' +
+      'group by product_id, expiration_date, n.ncm_code, p.name, p.brand, um.unity_measurement, food_stamp_id',
     // @ts-ignore
     [request.localId],
   );
