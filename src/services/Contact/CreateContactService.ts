@@ -19,16 +19,6 @@ class CreateContactService {
   public async execute(contact: IRequestDTO): Promise<Contact | undefined> {
     const contactsRepository = getCustomRepository(ContactsRepository);
 
-    const checkContactExists = await contactsRepository.findOne({
-      where: { zip_code: contact.zip_code },
-    });
-
-    if (checkContactExists) {
-      throw new Error(
-        `Contact with zip code ${contact.zip_code} already registered in the database`,
-      );
-    }
-
     try {
       const newContact = contactsRepository.create(contact);
       await contactsRepository.save(newContact);
