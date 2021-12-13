@@ -15,7 +15,7 @@ class CreateUserService {
   public async execute(user: IRequestDTO): Promise<User | undefined> {
     const usersRepository = getCustomRepository(UsersRepository);
 
-    const existUser = usersRepository.findOne({
+    const existUser = await usersRepository.findOne({
       where: {
         name: user.name,
       },
