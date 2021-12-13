@@ -11,7 +11,6 @@ export const cadastroSchema = Yup.object().shape({
 export const updateSchema = Yup.object().shape({
   id: Yup.string().required(),
   name: Yup.string().required(),
-  password: Yup.string().required(),
   local_id: Yup.string().required(),
   role_id: Yup.string().required(),
   active: Yup.boolean().required(),

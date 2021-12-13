@@ -7,6 +7,9 @@ class Role {
 
   @Column()
   name: string;
+
+  @Column('boolean')
+  active: boolean;
 }
 
 export default Role;

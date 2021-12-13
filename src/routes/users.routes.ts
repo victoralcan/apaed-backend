@@ -12,10 +12,14 @@ const usersRouter = Router();
 
 usersRouter.get('/', async (request, response) => {
   const usersRepository = getCustomRepository(UsersRepository);
-  const users = await usersRepository.find({
+  const { take = 10, skip = 0 } = request.query;
+  const users = await usersRepository.findAndCount({
+    // @ts-ignore
     where: {
       active: true,
     },
+    take,
+    skip,
   });
 
   return response.json(users);
@@ -58,7 +62,7 @@ usersRouter.post('/', async (request, response) => {
     });
   } catch (e) {
     console.log(e);
-    throw new Error();
+    return response.status(500).json({ error: e.message });
   }
 
   if (!newUser) {

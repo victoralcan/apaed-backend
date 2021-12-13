@@ -23,7 +23,7 @@ class User {
   @Column()
   local_id: string;
 
-  @ManyToOne(() => Local)
+  @ManyToOne(() => Local, { eager: true })
   local: Local;
 
   @Column()
