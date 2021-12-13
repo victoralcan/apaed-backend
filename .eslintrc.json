@@ -48,7 +48,8 @@
     ],
     "@typescript-eslint/ban-ts-comment": "off",
     "no-return-await": "off",
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "no-param-reassign": "off"
   },
   "settings": {
     "import/resolver": {
