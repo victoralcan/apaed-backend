@@ -7,8 +7,8 @@ export default async function create(
   const connection = await createConnection();
 
   await connection.query(`
-  INSERT INTO FOOD_STAMP(id, name, type, open)
-  values ('${foodStamp1Id}', 'Cesta 1', 'Completa', true);
+  INSERT INTO FOOD_STAMP(id, name, type, open, delivered)
+  values ('${foodStamp1Id}', 'Cesta 1', 'Completa', true, false);
   `);
 
   await connection.close();

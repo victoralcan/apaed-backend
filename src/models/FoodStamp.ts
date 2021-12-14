@@ -19,12 +19,6 @@ class FoodStamp {
 
   @Column('boolean')
   open: boolean;
-  /* 
-  @Column()
-  product_local_donation_id: string;
-
-  @OneToMany(() => ProductLocalDonation, pld => pld.food_stamp_id)
-  product_local_donation: ProductLocalDonation[]; */
 
   @Column('boolean')
   active: boolean;
@@ -34,6 +28,9 @@ class FoodStamp {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column('boolean')
+  delivered: boolean;
 }
 
 export default FoodStamp;
