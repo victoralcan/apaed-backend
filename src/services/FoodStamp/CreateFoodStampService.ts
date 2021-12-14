@@ -7,6 +7,7 @@ interface IRequestDTO {
   name: string;
   open: boolean;
   active: boolean;
+  delivered: boolean;
 }
 
 class CreateFoodStampService {

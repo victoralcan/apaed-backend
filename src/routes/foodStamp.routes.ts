@@ -17,6 +17,7 @@ foodStampsRouter.get('/', async (request, response) => {
     // @ts-ignore
     where: {
       active: true,
+      delivered: false,
     },
     take,
     skip,
@@ -46,7 +47,7 @@ foodStampsRouter.post('/', async (request, response) => {
     return response.status(400).json({ error: 'Validation fails' });
   }
 
-  const { name, type, open, active } = request.body;
+  const { name, type, open, active, delivered } = request.body;
   const createFoodStamp = new CreateFoodStampService();
 
   let newFoodStamp;
@@ -57,6 +58,7 @@ foodStampsRouter.post('/', async (request, response) => {
       type,
       open,
       active,
+      delivered,
     });
   } catch (e) {
     console.log(e);
@@ -76,7 +78,7 @@ foodStampsRouter.put('/', async (request, response) => {
     return response.status(400).json({ error: 'Validation fails' });
   }
 
-  const { name, id, type, open, active } = request.body;
+  const { name, id, type, open, active, delivered } = request.body;
 
   const foodStampToUpdate = {
     id,
@@ -84,6 +86,7 @@ foodStampsRouter.put('/', async (request, response) => {
     type,
     open,
     active,
+    delivered,
   };
 
   if (!validate(id)) {
